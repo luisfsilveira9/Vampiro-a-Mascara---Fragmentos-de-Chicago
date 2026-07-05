@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"/c/Users/luisd/Downloads/renpy-8.5.3-sdk/renpy.exe\" \"/c/Users/luisd/Documents/A Queda de Chicago/Vampiro A Mscara  Fragmentos de Chicago\" compile)",
+      "Bash(echo \"COMPILE EXIT: $?\")",
+      "Bash(\"/c/Users/luisd/Downloads/renpy-8.5.3-sdk/renpy.exe\" \"/c/Users/luisd/Documents/A Queda de Chicago/Vampiro A Mscara  Fragmentos de Chicago\" lint)",
+      "Bash(echo \"LINT EXIT: $?\")",
+      "Bash(find \"/c/Users/luisd/Downloads/renpy-8.5.3-sdk/renpy\" -maxdepth 1 -iname \"*.py\" | head -20; echo \"---\"; find \"/c/Users/luisd/Downloads/renpy-8.5.3-sdk\" -iname \"exports*.py*\" 2>/dev/null)",
+      "Read(//c/Users/luisd/Downloads/renpy-8.5.3-sdk/**)",
+      "Bash(python3 -c ' *)",
+      "Bash(head -n 278 script.rpy)",
+      "Bash(mv script.rpy.tmp script.rpy)",
+      "Bash(grep -n \"jump fase2_interrogatorio\\\\|\\\\\\\\$ alvo_laranja\" \"/c/Users/luisd/Documents/A Queda de Chicago/Vampiro A Mscara  Fragmentos de Chicago/game/ato1.rpy\")"
+    ]
+  }
+}
