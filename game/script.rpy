@@ -21,13 +21,78 @@ define slick = Character("Slick", color="#19255e")
 define moto = Character("Moto", color="#a3f708")
 # --- Sprites dos personagens ---
 # Onde existe arte real (game/images/personagens/), ela é usada.
-# Onde não existe, entra um placeholder sólido na cor do personagem,
-# só para marcar presença em cena até a arte definitiva chegar.
-image isadora = "images/personagens/Isadora.png"
-image silas = "images/personagens/Silas.png"
-image rook = "images/personagens/Rook.png"
+# Onde não existe, um placeholder colorido com o nome e a expressão marca
+# a presença em cena até a arte definitiva chegar. Basta salvar o PNG com
+# o nome de arquivo esperado em game/images/personagens/ que o jogo passa
+# a usá-lo automaticamente, sem precisar tocar neste arquivo — os prompts
+# de cada arte estão em game/images/personagens/PROMPTS_ARTE.md.
+init -1 python:
+    def retrato(arquivo, nome, expressao, cor, xsize=500, ysize=850):
+        caminho = "images/personagens/" + arquivo
+        if renpy.loadable(caminho):
+            return caminho
+        rotulo = nome if expressao == "neutro" else nome + "\n(" + expressao + ")"
+        return Fixed(
+            Solid(cor, xsize=xsize, ysize=ysize),
+            Text(rotulo, xalign=0.5, yalign=0.5, xsize=xsize - 20, text_align=0.5,
+                 color="#ffffff", size=28, outlines=[(2, "#000000", 0, 0)]),
+            xsize=xsize, ysize=ysize,
+        )
+
 image marcus = "images/personagens/Marcus.png"
+
+# Isadora — arte base real já existe; "show isadora" sem atributo continua igual.
+image isadora = "images/personagens/Isadora.png"
+image isadora neutra = retrato("Isadora.png", "Isadora", "neutro", "#8b0000", 1080, 1080)
+image isadora seria = retrato("Isadora_seria.png", "Isadora", "séria", "#8b0000", 1080, 1080)
+image isadora brava = retrato("Isadora_brava.png", "Isadora", "brava", "#8b0000", 1080, 1080)
+image isadora medo = retrato("Isadora_medo.png", "Isadora", "medo", "#8b0000", 1080, 1080)
+
+# Silas — arte base real já o mostra ferido; "show silas" sem atributo continua igual.
+image silas = "images/personagens/Silas.png"
+image silas ferido = retrato("Silas.png", "Silas", "ferido", "#556b2f", 1080, 1080)
+image silas dor = retrato("Silas_dor.png", "Silas", "dor", "#556b2f", 1080, 1080)
+image silas exausto = retrato("Silas_exausto.png", "Silas", "exausto", "#556b2f", 1080, 1080)
+
+# Rook — arte base real já existe; "show rook" sem atributo continua igual.
+image rook = "images/personagens/Rook.png"
+image rook neutro = retrato("Rook.png", "Rook", "neutro", "#b5651d", 1080, 1080)
+image rook irritado = retrato("Rook_irritado.png", "Rook", "irritado", "#b5651d", 1080, 1080)
+image rook preocupado = retrato("Rook_preocupado.png", "Rook", "preocupado", "#b5651d", 1080, 1080)
+
+# Moto — ainda sem arte definitiva.
+image moto neutro = retrato("Moto_neutro.png", "Moto", "neutro", "#a3f708")
+image moto tenso = retrato("Moto_tenso.png", "Moto", "tenso", "#a3f708")
+image moto alerta = retrato("Moto_alerta.png", "Moto", "alerta", "#a3f708")
+
+# Slick — ainda sem arte definitiva.
+image slick concentrada = retrato("Slick_concentrada.png", "Slick", "concentrada", "#19255e")
+image slick surpresa = retrato("Slick_surpresa.png", "Slick", "surpresa", "#19255e")
+image slick irritada = retrato("Slick_irritada.png", "Slick", "irritada", "#19255e")
+
+# Doutor Miller — ainda sem arte definitiva.
 image dr_miller = Solid("#708090", xsize=500, ysize=850)
+image dr_miller ganancioso = retrato("DrMiller_ganancioso.png", "Doutor Miller", "ganancioso", "#708090")
+image dr_miller assustado = retrato("DrMiller_assustado.png", "Doutor Miller", "assustado", "#708090")
+image dr_miller arrogante = retrato("DrMiller_arrogante.png", "Doutor Miller", "arrogante", "#708090")
+
+# Mulher de Vestido Vermelho (a "dançarina" do clube Velvet) — ainda sem arte definitiva.
+image dancarina dancando = retrato("MulherVestidoVermelho_dancando.png", "Mulher de Vestido Vermelho", "dançando", "#a10021")
+image dancarina sedutora = retrato("MulherVestidoVermelho_sedutora.png", "Mulher de Vestido Vermelho", "sedutora", "#a10021")
+image dancarina panico = retrato("MulherVestidoVermelho_panico.png", "Mulher de Vestido Vermelho", "pânico", "#a10021")
+
+# Mulher no Bar (a "executiva" do clube Velvet) — ainda sem arte definitiva.
+image executiva entediada = retrato("MulherNoBar_entediada.png", "Mulher no Bar", "entediada", "#2f2f3a")
+image executiva interessada = retrato("MulherNoBar_interessada.png", "Mulher no Bar", "interessada", "#2f2f3a")
+image executiva panico = retrato("MulherNoBar_panico.png", "Mulher no Bar", "pânico", "#2f2f3a")
+
+# Bandido no Beco — ainda sem arte definitiva.
+image bandido ameacador = retrato("BandidoNoBeco_ameacador.png", "Bandido no Beco", "ameaçador", "#3a3a3a")
+image bandido ferido = retrato("BandidoNoBeco_ferido.png", "Bandido no Beco", "ferido", "#3a3a3a")
+
+# Turista no Beco — ainda sem arte definitiva.
+image turista assustado = retrato("TuristaNoBeco_assustado.png", "Turista no Beco", "assustado", "#4a5568")
+image turista aliviado = retrato("TuristaNoBeco_aliviado.png", "Turista no Beco", "aliviado", "#4a5568")
 
 # HUD de Status
 screen hud_vampiro():
@@ -215,12 +280,15 @@ label sala_de_guerra:
 
     rook "Slick! Joga isso na rede. O que diabos é o 'Corvo de Ouro'?"
 
+    show slick concentrada with dissolve
     "A garota no laptop ('Slick') não para de digitar. O estalar das teclas preenche o vazio."
-    
+
+    show slick surpresa with dissolve
     slick "Achei. 'Corvo de Ouro' não é uma pessoa. É uma escultura raríssima roubada há décadas. E adivinha? Ela vai ser leiloada hoje à noite. Um evento super restrito da alta sociedade no Elysium da Camarilla."
 
     "A porta pesada do armazém se abre com um rangido estridente. O homem da escopeta se aproxima sacudindo a água do casaco de couro."
-    
+
+    show moto tenso with dissolve
     moto "Rook, o porto sul está fervendo. Contrabandistas movendo caixas de chumbo pesadas. Cheiro forte de munição ultravioleta e dinheiro sujo, vivo, não rastreável."
 
     isadora "O tal 'pagamento da Galeria'..."
@@ -247,12 +315,14 @@ label sala_de_guerra:
                 call rolar_teste(res_tech_silas, 4, comp_tech_silas)
                 if _return >= 4:
                     "Seus dedos voam sobre o teclado de Slick. Você isola o firewall da Inquisição e o contorna com um script fantasma. A tela verde revela o endereço IP de um servidor físico escondido no distrito financeiro."
+                    show slick surpresa with dissolve
                     slick "Puta merda... Você é bom, garoto. Temos o endereço de acesso do servidor!"
                     $ confianca_isadora += 1
                     $ xp_disponivel += 1
                     "A confiança de Isadora em você aumenta, e os Anarquistas te olham com novo respeito. (+1 XP)"
                 else:
                     "Você insere um comando invasivo, mas o sistema detecta a anomalia. O celular superaquece nas suas mãos e a tela morre com um estalo elétrico cheirando a ozônio."
+                    show slick irritada with dissolve
                     slick "Merda! O sistema de segurança fritou a placa-mãe. Perdemos o acesso direto, e quase fomos rastreados."
                     rook "Ótimo. Tentar brincar de hacker nos custou o atalho. Agora vamos ter que invadir a rede às cegas através dos cabos subterrâneos."
             
@@ -291,27 +361,34 @@ label sala_de_guerra:
 
 label caca_beco:
     scene bg_beco with fade
+    show bandido ameacador at left with dissolve
+    show turista assustado at right with dissolve
     "Você espreita um assaltante num beco. Ele encurralou um turista. O turista foge, e o caçador vira a presa. Faça um teste de Destreza + Furtividade (Dificuldade 2)."
+    hide turista with dissolve
 
     $ res_furt, comp_furt = montar_pool((atributos, "Destreza"), (habilidades, "Furtividade"))
     call rolar_teste(res_furt, 2, comp_furt)
 
     if _return >= 2:
         "Você se move como o abismo. Sua mão tapa a boca dele e você o puxa para as sombras. O sangue quente inunda sua garganta. A cidade está mais segura."
+        hide bandido with dissolve
         $ fome = 0
         jump inicio_investigacao
     else:
         "Seus sapatos raspam no chão. Ele vira com uma faca tática. Ele acha que você é apenas uma vítima comum. Teste Força + Briga (Dificuldade 2)."
         $ res_briga, comp_briga = montar_pool((atributos, "Força"), (habilidades, "Briga"))
         call rolar_teste(res_briga, 2, comp_briga)
-        
+
         if _return >= 2:
+            show bandido ferido with dissolve
             "Você quebra o pulso dele e bebe rápido e sem cuidado. Foi sujo e deixou marcas, mas você sobreviveu."
+            hide bandido with dissolve
             $ fome = max(0, fome - 2)
             $ saude_atual -= 1
             jump inicio_investigacao
         else:
             "Ele é rápido demais. A lâmina rasga seu estômago. Pior: os gritos dele ecoaram. A polícia chegou na entrada do beco."
+            hide bandido with dissolve
             $ fome = max(0, fome - 1)
             $ saude_atual -= 2
             call escalar_conflito(3, "Você está encurralado pela polícia. É hora de forçar a saída.")
@@ -332,21 +409,28 @@ label caca_clube:
 
     "A segunda está sentada no bar. Uma mulher de terninho escuro, girando um copo de dry martini intocado. O olhar dela é cínico, entediado, avaliando todo mundo com desdém. A respiração é lenta e controlada. O sangue dela deve ser complexo, denso, com o sabor maduro da melancolia."
 
+    show dancarina dancando at left with dissolve
+    show executiva entediada at right with dissolve
+
     menu:
         "A mulher de vestido vermelho na pista de dança":
             $ alvo_caca = "dancarina"
+            hide executiva with dissolve
             "Você desliza para o meio da pista. A música consome os sentidos dela, o que facilita a sua aproximação. Você se move no mesmo ritmo, o corpo encostando levemente no dela. Quando ela abre os olhos e te vê, a surpresa se transforma quase imediatamente em desejo hipnotizado."
 
             p "A música está alta, mas eu consigo ouvir o seu coração daqui..."
 
+            show dancarina sedutora at left with dissolve
             "Ela sorri, a respiração falhando. \"Me leva pra um lugar mais calmo\", ela sussurra no seu ouvido."
 
         "A mulher de terninho no bar":
             $ alvo_caca = "executiva"
+            hide dancarina with dissolve
             "Você se senta no banco vazio ao lado dela. Você pede ao barman um copo de uísque que não vai beber, apenas para segurá-lo."
 
             p "Lugar cheio, mas você parece que preferia estar em qualquer outro canto do mundo."
 
+            show executiva interessada at right with dissolve
             "Ela vira o rosto para você. Os olhos dela são afiados. \"Pessoas me entediam. Mas você... você não tem a mesma expressão desesperada que o resto do bar\", ela diz, sorrindo de canto. \"Estou no camarote VIP. Quer companhia para ignorar essa festa?\""
 
     "Faça um teste de Carisma + Persuasão (Dificuldade 2) para envolvê-la completamente."
@@ -376,10 +460,16 @@ label caca_clube:
 
         "Você ajusta o casaco, limpa uma gota solitária de sangue do canto do lábio e sai do ambiente."
 
+        hide dancarina with dissolve
+        hide executiva with dissolve
         $ fome = 0
         "A Fome desapareceu. Você está no auge do seu poder. Chicago está pronta para ser quebrada."
         jump inicio_investigacao
     else:
+        if alvo_caca == "dancarina":
+            show dancarina panico with dissolve
+        else:
+            show executiva panico with dissolve
         "Sua Besta rosnou alto demais no meio do beijo. Ela sente o erro — um puxão forte demais, um som gutural baixo demais para ser humano — e entra em pânico, empurrando você com toda a força que o medo empresta."
         "O grito dela morre abafado pela música, mas não morre rápido o suficiente. Dois seguranças imensos já vêm na direção de vocês, e a Máscara, pela primeira vez esta noite, racha de verdade."
         $ humanidade -= 1
@@ -396,6 +486,8 @@ label caca_clube:
                 $ res_fuga, comp_fuga = res_fuga_medo, comp_fuga_medo
 
         call rolar_teste(res_fuga, 3, comp_fuga)
+        hide dancarina with dissolve
+        hide executiva with dissolve
         if _return >= 3:
             "Você escapa pela porta dos fundos. Mas não conseguiu beber, e um informante da Camarilla te viu. Você fez inimigos hoje."
             jump inicio_investigacao
@@ -407,19 +499,21 @@ label caca_clube:
 
 label caca_comerciante:
     scene black with fade
-    show dr_miller at center with dissolve
+    show dr_miller ganancioso at center with dissolve
     "Você vai até o necrotério onde o Doutor Miller vende bolsas de sangue roubadas."
     dr_miller "O sangue tá em falta, mocinho. Não quero dinheiro. Quero que fique me devendo um favor."
-    
+
     "Ficar devendo a um lacaio é assinar um cheque em branco. Tente baixar o tom dele: Manipulação + Intimidação (Dificuldade 2)."
     $ res_int, comp_int = montar_pool((atributos, "Manipulação"), (habilidades, "Intimidação"))
     call rolar_teste(res_int, 2, comp_int)
 
     if _return >= 2:
+        show dr_miller assustado with dissolve
         "Você prensa a mão dele na mesa. Sua voz sai como gelo. Miller recua e entrega as bolsas, aterrorizado. Sangue de graça."
         $ fome = 0
         jump inicio_investigacao
     else:
+        show dr_miller arrogante with dissolve
         "Ele ri da sua tentativa. 'Meu mestre é do Primogênito. Ou aceita a Dívida de Vida, ou sai vazio'."
         menu:
             "Aceitar a Dívida Primogênita":
