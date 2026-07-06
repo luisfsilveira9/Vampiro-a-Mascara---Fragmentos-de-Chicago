@@ -95,9 +95,9 @@ define gui.title_text_size = False
 define gui.main_menu_background = Transform("images/capa.png", xsize=config.screen_width, ysize=config.screen_height, fit="cover", xalign=0.5, yalign=0.5)
 define gui.game_menu_background = "gui/game_menu.png"
 
-## Se o título/versão sobrepostos no menu principal devem ser exibidos.
-## A capa já traz o nome do jogo desenhado nela, então isso fica desligado.
-define gui.show_name = False
+## gui.show_name (se o título deve ser sobreposto no menu principal) já é
+## definido em options.rpy — a capa traz o nome do jogo desenhado, por isso
+## está como False lá.
 
 
 ## Diálogo #####################################################################

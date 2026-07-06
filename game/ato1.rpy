@@ -14,9 +14,10 @@ define abernathy = Character("Sr. Abernathy", color="#8a8a5c")
 define jimmy = Character("\"Mãos-de-Graxa\" Jimmy", color="#8b5a2b")
 
 # --- Sprites dos personagens deste arquivo ---
-# Madame K já tem arte real; o resto usa um placeholder sólido na
-# cor do personagem até a arte definitiva chegar.
-image madamek = "images/personagens/MadameK.png"
+# A arte antiga de Madame K (MadameK.png) não está mais na pasta e nenhuma
+# substituta foi gerada; cai no placeholder colorido até chegar arte nova.
+# O resto usa um placeholder sólido na cor do personagem, sem arte ainda.
+image madamek = retrato("MadameK.png", "Madame K", "neutro", "#8b7d6b", 1080, 1080)
 image jax = Solid("#c0762c", xsize=500, ysize=850)
 image blink = Solid("#d63384", xsize=500, ysize=850)
 image vargas = Solid("#a68a3c", xsize=500, ysize=850)
@@ -194,8 +195,8 @@ label ato1_rastreio:
 # --- CONVERGÊNCIA: A SALA DE GUERRA (O BECO SEM SAÍDA) ---
 label beco_sem_saida:
     scene black with fade
-    show isadora at left with dissolve
-    show rook at right with dissolve
+    show isadora imponente at left with dissolve
+    show rook intimacao at right with dissolve
     "Você retorna ao armazém de Rook com a chuva lavando o sangue das suas mãos. Quer você tenha vindo das docas cheirando a pólvora, do leilão com gosto de champanhe no paladar, ou dos esgotos com os olhos ardendo das telas de computador, o resultado que você joga na mesa de Rook é o mesmo."
 
     isadora "\"Corvo Dourado Holdings\"."
@@ -311,7 +312,7 @@ label noite_de_caca:
 # o vínculo entre os dois antes que a noite recomece.
 label isadora_intimidade:
     scene bg_refugio with dissolve
-    show isadora at center with dissolve
+    show isadora pensativa at center with dissolve
 
     "A fogueira improvisada em um tambor de óleo projeta sombras dançantes nas paredes do armazém. Longe dos Anarquistas que discutem do outro lado do galpão, Isadora está de pé, observando a chuva cair por uma janela quebrada."
 
@@ -348,6 +349,7 @@ label isadora_intimidade:
 
     isadora "Eu vi como você lutava no seu dia a dia. Vi a raiva nos seus olhos quando as coisas davam errado, e a resiliência absurda de se levantar no dia seguinte. Você tinha... uma faísca. O mundo estava te matando aos poucos, e eu não suportei ver esse fogo se apagar no meio da mediocridade mortal."
 
+    show isadora sorrindo at center with dissolve
     "Ela levanta a mão, os dedos frios e pálidos roçando levemente a linha do seu maxilar."
 
     isadora "Eu te dei a eternidade. E sim, te dei a Fome e o inferno junto. Mas eu te dei poder. Nunca me peça desculpas por isso. E nunca duvide de por que eu te quis ao meu lado."
@@ -358,6 +360,7 @@ label isadora_intimidade:
             $ confianca_isadora += 1
 
         "Dar um passo para trás, mantendo a independência":
+            show isadora imponente at center with dissolve
             "Você recua. Não por repulsa, mas por autopreservação. Isadora abaixa a mão lentamente. Ela respeita o seu espaço, percebendo que o cria dela tem vontade própria. O olhar dela se torna analítico, misturando aprovação e cautela."
 
     isadora "Vá. Faça o que tem que ser feito esta noite. Mas volte inteiro para mim."
@@ -816,7 +819,7 @@ label verdade_sombras:
         else:
             "Isadora Vane entra no quarto VIP silenciosamente pelo terraço. A suíte está vazia além de você — Veronica nunca vai saber que esteve aqui."
 
-    show isadora at center with dissolve
+    show isadora brava at center with hpunch
 
     "(Surgindo das sombras atrás de você, a voz transbordando veneno)"
 
@@ -832,8 +835,8 @@ label verdade_sombras:
 label investigacao_empresa:
 
     scene bg_refugio with fade
-    show isadora at left with dissolve
-    show marcus at right with dissolve
+    show isadora imponente at left with dissolve
+    show marcus at right with moveinright
     "Você e Isadora invadem a cobertura de Deverell. Ele está lá, sereno, bebendo sangue de uma taça de cristal."
 
     marcus "Sacrifiquei o peso morto para manter Chicago limpa. E agora, vira-lata? O que você vai fazer?"
@@ -844,15 +847,18 @@ label investigacao_empresa:
         "Execução Bruta (Arrancar a cabeça dele)":
             $ final_tipo = "poder"
             $ camarilla_ameaca = True
+            show isadora predatoria at left with hpunch
             "Você o decapita no tapete persa. O submundo te temerá, mas a Camarilla jurará sua morte."
-        
+
         "A Justiça do Elysium (Entregar as provas para a Camarilla)":
             $ final_tipo = "humanidade"
+            show isadora sorrindo at left with dissolve
             "Você o expõe. O próprio clã dele o condena. Você é visto como justo, mas como uma engrenagem do sistema."
 
         "O Contrato Corrupto (Extorquir a fortuna dele)":
             $ final_tipo = "besta"
             $ humanidade -= 1
+            show isadora pensativa at left with dissolve
             "Você toma o dinheiro e o silencia. Fica rico e influente, mas Marcus será uma cobra encurralada esperando para dar o bote."
 
     isadora "Bem jogado. Muito bem jogado."

@@ -5,10 +5,9 @@ init python:
 
 image bg_refugio = At("images/bg_refugio.jpg", Transform(xsize=config.screen_width, ysize=config.screen_height))
 image sala_de_guerra = At("images/bg_rook.png", Transform(xsize=config.screen_width, ysize=config.screen_height))
-image  bg_beco= At("images/bg_beco.png", Transform(xsize=config.screen_width, ysize=config.screen_height))
-image bg_beco = Solid("#0a0a0f")
+image bg_beco = At("images/bg_beco.png", Transform(xsize=config.screen_width, ysize=config.screen_height))
 image bg_clube = Solid("#1a001a")
-image black= Solid("#000")
+image black = Solid("#000")
 
 define i = Character("Mulher Misteriosa", color="#c8c8c8")
 define isadora = Character("Isadora Vane", color="#8b0000")
@@ -30,69 +29,69 @@ init -1 python:
     def retrato(arquivo, nome, expressao, cor, xsize=500, ysize=850):
         caminho = "images/personagens/" + arquivo
         if renpy.loadable(caminho):
-            return caminho
+            # Redimensiona a arte real para caber na caixa xsize/ysize sem
+            # cortar nada (as artes geradas vêm em tamanhos/proporções
+            # variados, ex.: 1056x1504 — bem maiores que a tela em pé).
+            return Transform(caminho, xsize=xsize, ysize=ysize, fit="contain")
         rotulo = nome if expressao == "neutro" else nome + "\n(" + expressao + ")"
         return Fixed(
             Solid(cor, xsize=xsize, ysize=ysize),
             Text(rotulo, xalign=0.5, yalign=0.5, xsize=xsize - 20, text_align=0.5,
-                 color="#ffffff", size=28, outlines=[(2, "#000000", 0, 0)]),
+            color="#ffffff", size=28, outlines=[(2, "#000000", 0, 0)]),
             xsize=xsize, ysize=ysize,
         )
 
-image marcus = "images/personagens/Marcus.png"
+# Marcus — a arte antiga (Marcus.png) não está mais na pasta e nenhuma
+# substituta foi gerada; cai no placeholder colorido até chegar arte nova.
+image marcus = retrato("Marcus.png", "Marcus Deverell", "neutro", "#c77dff", 1080, 1080)
 
-# Isadora — arte base real já existe; "show isadora" sem atributo continua igual.
-image isadora = "images/personagens/Isadora.png"
-image isadora neutra = retrato("Isadora.png", "Isadora", "neutro", "#8b0000", 1080, 1080)
-image isadora seria = retrato("Isadora_seria.png", "Isadora", "séria", "#8b0000", 1080, 1080)
-image isadora brava = retrato("Isadora_brava.png", "Isadora", "brava", "#8b0000", 1080, 1080)
-image isadora medo = retrato("Isadora_medo.png", "Isadora", "medo", "#8b0000", 1080, 1080)
+# Isadora — a arte antiga (Isadora.png) não está mais na pasta, mas as 6
+# expressões abaixo têm arte real (ch_isadora_*.png). "imponente" é usada
+# como aparência padrão ("show isadora" sem atributo).
+image isadora = retrato("ch_isadora_imponente.png", "Isadora", "neutro", "#8b0000", 1080, 1080)
+image isadora imponente = retrato("ch_isadora_imponente.png", "Isadora", "imponente", "#8b0000", 1080, 1080)
+image isadora brava = retrato("ch_isadora_brava.png", "Isadora", "brava", "#8b0000", 1080, 1080)
+image isadora medo = retrato("ch_isadora_medo.png", "Isadora", "medo", "#8b0000", 1080, 1080)
+image isadora pensativa = retrato("ch_isadora_pensativa.png", "Isadora", "pensativa", "#8b0000", 1080, 1080)
+image isadora sorrindo = retrato("ch_isadora_sorrindo.png", "Isadora", "sorrindo", "#8b0000", 1080, 1080)
+image isadora predatoria = retrato("ch_isadora_sorriso_predatorio.png", "Isadora", "sorriso predatório", "#8b0000", 1080, 1080)
 
-# Silas — arte base real já o mostra ferido; "show silas" sem atributo continua igual.
-image silas = "images/personagens/Silas.png"
-image silas ferido = retrato("Silas.png", "Silas", "ferido", "#556b2f", 1080, 1080)
-image silas dor = retrato("Silas_dor.png", "Silas", "dor", "#556b2f", 1080, 1080)
-image silas exausto = retrato("Silas_exausto.png", "Silas", "exausto", "#556b2f", 1080, 1080)
+# Silas — a arte antiga (Silas.png) não está mais na pasta; "ferido"/"dor"
+# usam a mesma arte nova (ch_silas_dor.png), que já o mostra machucado.
+# "ferido" segue como aparência padrão ("show silas" sem atributo).
+image silas = retrato("ch_silas_dor.png", "Silas", "ferido", "#556b2f", 1080, 1080)
+image silas ferido = retrato("ch_silas_dor.png", "Silas", "ferido", "#556b2f", 1080, 1080)
+image silas dor = retrato("ch_silas_dor.png", "Silas", "dor", "#556b2f", 1080, 1080)
+image silas intimacao = retrato("ch_silas_intimacao.png", "Silas", "intimação", "#556b2f", 1080, 1080)
+image silas neutro = retrato("ch_silas_neutro.png", "Silas", "neutro", "#556b2f", 1080, 1080)
 
-# Rook — arte base real já existe; "show rook" sem atributo continua igual.
-image rook = "images/personagens/Rook.png"
-image rook neutro = retrato("Rook.png", "Rook", "neutro", "#b5651d", 1080, 1080)
-image rook irritado = retrato("Rook_irritado.png", "Rook", "irritado", "#b5651d", 1080, 1080)
-image rook preocupado = retrato("Rook_preocupado.png", "Rook", "preocupado", "#b5651d", 1080, 1080)
+# Rook — a arte antiga (Rook.png) não está mais na pasta; "neutro" usa a
+# arte nova (ch_rook_neutro.png) como aparência padrão.
+image rook = retrato("ch_rook_neutro.png", "Rook", "neutro", "#b5651d", 1080, 1080)
+image rook neutro = retrato("ch_rook_neutro.png", "Rook", "neutro", "#b5651d", 1080, 1080)
+image rook frente = retrato("ch_rook_neutro_frente.png", "Rook", "neutro de frente", "#b5651d", 1080, 1080)
+image rook intimacao = retrato("ch_rook_intimacao.png", "Rook", "intimidando", "#b5651d", 1080, 1080)
 
-# Moto — ainda sem arte definitiva.
-image moto neutro = retrato("Moto_neutro.png", "Moto", "neutro", "#a3f708")
-image moto tenso = retrato("Moto_tenso.png", "Moto", "tenso", "#a3f708")
-image moto alerta = retrato("Moto_alerta.png", "Moto", "alerta", "#a3f708")
+# Moto — uma única expressão disponível por enquanto.
+image moto = retrato("ch_moto_neutro.png", "Moto", "neutro", "#a3f708", 1080, 1080)
 
-# Slick — ainda sem arte definitiva.
-image slick concentrada = retrato("Slick_concentrada.png", "Slick", "concentrada", "#19255e")
-image slick surpresa = retrato("Slick_surpresa.png", "Slick", "surpresa", "#19255e")
-image slick irritada = retrato("Slick_irritada.png", "Slick", "irritada", "#19255e")
+# Slick — uma única expressão disponível por enquanto.
+image slick = retrato("ch_slick_neutro.png", "Slick", "neutro", "#19255e", 1080, 1080)
 
-# Doutor Miller — ainda sem arte definitiva.
-image dr_miller = Solid("#708090", xsize=500, ysize=850)
-image dr_miller ganancioso = retrato("DrMiller_ganancioso.png", "Doutor Miller", "ganancioso", "#708090")
-image dr_miller assustado = retrato("DrMiller_assustado.png", "Doutor Miller", "assustado", "#708090")
-image dr_miller arrogante = retrato("DrMiller_arrogante.png", "Doutor Miller", "arrogante", "#708090")
+# Doutor Miller — uma única expressão disponível por enquanto.
+image dr_miller = retrato("ch_dr_miller_neutro.png", "Doutor Miller", "neutro", "#708090", 1080, 1080)
 
-# Mulher de Vestido Vermelho (a "dançarina" do clube Velvet) — ainda sem arte definitiva.
-image dancarina dancando = retrato("MulherVestidoVermelho_dancando.png", "Mulher de Vestido Vermelho", "dançando", "#a10021")
-image dancarina sedutora = retrato("MulherVestidoVermelho_sedutora.png", "Mulher de Vestido Vermelho", "sedutora", "#a10021")
-image dancarina panico = retrato("MulherVestidoVermelho_panico.png", "Mulher de Vestido Vermelho", "pânico", "#a10021")
+# Mulher de Vestido Vermelho (a "dançarina" do clube Velvet) — uma única expressão disponível.
+image dancarina = retrato("ch_mulher_vestido_vermelho.png", "Mulher de Vestido Vermelho", "neutro", "#a10021", 1080, 1080)
 
-# Mulher no Bar (a "executiva" do clube Velvet) — ainda sem arte definitiva.
-image executiva entediada = retrato("MulherNoBar_entediada.png", "Mulher no Bar", "entediada", "#2f2f3a")
-image executiva interessada = retrato("MulherNoBar_interessada.png", "Mulher no Bar", "interessada", "#2f2f3a")
-image executiva panico = retrato("MulherNoBar_panico.png", "Mulher no Bar", "pânico", "#2f2f3a")
+# Mulher no Bar (a "executiva" do clube Velvet) — uma única expressão disponível.
+image executiva = retrato("ch_mulher_bar.png", "Mulher no Bar", "neutro", "#2f2f3a", 1080, 1080)
 
-# Bandido no Beco — ainda sem arte definitiva.
-image bandido ameacador = retrato("BandidoNoBeco_ameacador.png", "Bandido no Beco", "ameaçador", "#3a3a3a")
-image bandido ferido = retrato("BandidoNoBeco_ferido.png", "Bandido no Beco", "ferido", "#3a3a3a")
+# Bandido no Beco — uma única expressão disponível.
+image bandido = retrato("ch_assaltante_beco.png", "Bandido no Beco", "neutro", "#3a3a3a", 1080, 1080)
 
-# Turista no Beco — ainda sem arte definitiva.
-image turista assustado = retrato("TuristaNoBeco_assustado.png", "Turista no Beco", "assustado", "#4a5568")
-image turista aliviado = retrato("TuristaNoBeco_aliviado.png", "Turista no Beco", "aliviado", "#4a5568")
+# Turista no Beco — uma única expressão disponível.
+image turista = retrato("ch_turista_beco.png", "Turista no Beco", "neutro", "#4a5568", 1080, 1080)
 
 # HUD de Status
 screen hud_vampiro():
@@ -157,7 +156,7 @@ label start:
 
     "O porão é gótico, forrado de livros antigos e iluminado por velas tremeluzentes. A fumaça do incenso mascara um cheiro metálico no ar."
 
-    show isadora at center with dissolve
+    show isadora predatoria at center with dissolve
 
     isadora "Olha só quem voltou. Seja muito bem-vinda ao seu primeiro e último pesadelo."
 
@@ -216,11 +215,13 @@ label start:
     call rolar_teste(reserva_teste_inicial, 2, comp_teste_inicial)
     
     if _return >= 2:
+        show isadora sorrindo at center with dissolve
         "Você segura o pulso dela com delicadeza. O gosto é o céu e o inferno juntos, mas você para de beber antes de enlouquecer."
         "Isadora sorri, orgulhosa do seu refinamento. A sua Fome recua."
         $ fome = 1
         $ confianca_isadora += 1
     else:
+        show isadora brava at center with hpunch
         "A Besta vence. Você avança nela com um rosnado gutural, derrubando-a e lambendo o sangue desesperadamente."
         "Isadora te empurra com força, decepcionada com seu estado animalesco. Você perde um pedaço da sua Humanidade."
         $ fome = 3
@@ -229,16 +230,18 @@ label start:
 
     # --- O ATAQUE ---
     scene bg_refugio with vpunch
-    show isadora at left with dissolve
-    show silas at right with dissolve
+    show isadora imponente at left with dissolve
+    show silas dor at right with moveinright
     "A porta do porão é arrombada. Silas, um aliado de Isadora, entra tropeçando, coberto de queimaduras fumegantes."
 
     silas "(Cuspindo cinzas) Isadora... fomos vendidos. A Inquisição atacou a Zona Norte. Eles tinham as plantas..."
     isadora "Quem, Silas? Quem entregou as plantas?"
 
     "Silas está à beira do coma vampírico. Sirenes já cortam a rua lá em cima"
+
+    show isadora medo at left with dissolve
     "Isadora olha pra você, e pela primeira vez naquela noite, é possível ver o medo em seus olhos"
-    
+
     isadora "São os inquisitores. Precisamos sair daqui"
     silas "Pelos tuneis...eu conheço um caminho até o refugio do Rook"
 
@@ -252,15 +255,15 @@ label sala_de_guerra:
     "A chuva lá fora parece tentar lavar o cheiro de cinzas de Silas, mas o terror da noite impregnou as paredes de concreto."
     
     show sala_de_guerra with fade
-    show isadora at left with dissolve
-    show rook at right with dissolve
+    show isadora imponente at left with dissolve
+    show rook intimacao at right with dissolve
 
     "O refúgio dos Anarquistas é um caos organizado. Caixotes de armamento pesado, monitores empilhados e motocicletas desmontadas. Vampiros de jaqueta de couro e feições endurecidas avaliam você sob a luz fraca. O bando de Rook."
 
     rook "Quem é a garota, Vane? Meu armazém não é creche para recém-criadas."
-    
+
     isadora "Ela é minha cria. E a única razão de Silas ainda estar respirando. [nome_jogador], este é Rook, o dono deste buraco. E a equipe dele..."
-    
+
     "Isadora aponta sutilmente para dois Anarquistas no fundo: um homem corpulento limpando uma escopeta e uma garota pálida digitando furiosamente em um laptop cheio de adesivos."
 
     rook "Vocês trouxeram a Inquisição para o meu quintal, Isadora. Isso é péssimo pros negócios."
@@ -268,35 +271,38 @@ label sala_de_guerra:
     p "Inquisição? Achei que isso fosse lenda medieval com tochas e ancinhos."
 
     isadora "A Segunda Inquisição, [nome_jogador]. Agências governamentais, o Vaticano, operações negras financiadas por orçamentos que não existem. Eles não usam tochas. Usam satélites, drones térmicos e munição de fósforo branco. Eles caçam nossa espécie para nos apagar do mapa."
-    
-    show silas at center with dissolve
+
+    show silas dor at center with dissolve
     "Silas se apoia na mesa de metal. A pele queimada dele regenera lentamente em um chiado doentio. A voz dele é áspera."
 
     silas "E eles sabiam... eles sabiam exatamente onde estávamos. Ignoraram nossos carniçais de segurança e foram direto para o cofre do refúgio."
-    
+
     silas "Eu ouvi o rádio tático do líder deles antes da granada de luz explodir. Ele disse: 'Alvo assegurado. Pagamento da Galeria confirmado. O Corvo de Ouro canta.' Foi a última coisa antes do fogo."
 
     "A sala fica em silêncio. O peso da realidade esmaga o ar. Um traidor, alguém de dentro de Chicago, entregou o refúgio por dinheiro."
 
     rook "Slick! Joga isso na rede. O que diabos é o 'Corvo de Ouro'?"
 
-    show slick concentrada with dissolve
+    hide silas with dissolve
+    show slick at center with moveinleft
     "A garota no laptop ('Slick') não para de digitar. O estalar das teclas preenche o vazio."
 
-    show slick surpresa with dissolve
     slick "Achei. 'Corvo de Ouro' não é uma pessoa. É uma escultura raríssima roubada há décadas. E adivinha? Ela vai ser leiloada hoje à noite. Um evento super restrito da alta sociedade no Elysium da Camarilla."
 
     "A porta pesada do armazém se abre com um rangido estridente. O homem da escopeta se aproxima sacudindo a água do casaco de couro."
 
-    show moto tenso with dissolve
+    hide slick with dissolve
+    show moto at center with moveinbottom
     moto "Rook, o porto sul está fervendo. Contrabandistas movendo caixas de chumbo pesadas. Cheiro forte de munição ultravioleta e dinheiro sujo, vivo, não rastreável."
 
     isadora "O tal 'pagamento da Galeria'..."
 
-    silas "Ainda tem mais." 
-    
+    hide moto with dissolve
+    show silas dor at center with dissolve
+    silas "Ainda tem mais."
+
     "Ele coloca um celular de carcaça militar, completamente rachado, sobre a mesa. A tela pisca erraticamente em vermelho."
-    
+
     silas "É o telefone de um dos caçadores. Eu consegui arrancar do colete dele enquanto fugíamos. Tem um rastreador embutido ligado a uma rede privada. Se revertermos o sinal, achamos os servidores da offshore que pagou a operação toda."
 
     rook "A segurança dessa rede deve ser nível Pentágono. Slick não consegue quebrar uma criptografia militar sozinha sem torrar a localização do meu armazém."
@@ -315,14 +321,16 @@ label sala_de_guerra:
                 call rolar_teste(res_tech_silas, 4, comp_tech_silas)
                 if _return >= 4:
                     "Seus dedos voam sobre o teclado de Slick. Você isola o firewall da Inquisição e o contorna com um script fantasma. A tela verde revela o endereço IP de um servidor físico escondido no distrito financeiro."
-                    show slick surpresa with dissolve
+                    hide silas with dissolve
+                    show slick at center with hpunch
                     slick "Puta merda... Você é bom, garoto. Temos o endereço de acesso do servidor!"
                     $ confianca_isadora += 1
                     $ xp_disponivel += 1
                     "A confiança de Isadora em você aumenta, e os Anarquistas te olham com novo respeito. (+1 XP)"
                 else:
                     "Você insere um comando invasivo, mas o sistema detecta a anomalia. O celular superaquece nas suas mãos e a tela morre com um estalo elétrico cheirando a ozônio."
-                    show slick irritada with dissolve
+                    hide silas with dissolve
+                    show slick at center with vpunch
                     slick "Merda! O sistema de segurança fritou a placa-mãe. Perdemos o acesso direto, e quase fomos rastreados."
                     rook "Ótimo. Tentar brincar de hacker nos custou o atalho. Agora vamos ter que invadir a rede às cegas através dos cabos subterrâneos."
             
@@ -346,7 +354,9 @@ label sala_de_guerra:
             $ rota_investigacao = "rastreio"
 
     # --- A FOME NAS RUAS (MINI-GAME DE CAÇA) ---
-    "O estresse da fuga ativou sua Besta. Sua Fome subiu para 3. Ir para a missão famint0 é suicídio. Você precisa caçar. Como vai saciar essa sede hoje?"
+    hide silas with dissolve
+    hide slick with dissolve
+    "O estresse da fuga ativou sua Besta. Sua Fome subiu para 3. Ir para a missão faminto é suicídio. Você precisa caçar. Como vai saciar essa sede hoje?"
     $ fome = max(fome, 3)
 
     menu:
@@ -361,10 +371,10 @@ label sala_de_guerra:
 
 label caca_beco:
     scene bg_beco with fade
-    show bandido ameacador at left with dissolve
-    show turista assustado at right with dissolve
+    show bandido at left with moveinleft
+    show turista at right with moveinright
     "Você espreita um assaltante num beco. Ele encurralou um turista. O turista foge, e o caçador vira a presa. Faça um teste de Destreza + Furtividade (Dificuldade 2)."
-    hide turista with dissolve
+    hide turista with moveoutright
 
     $ res_furt, comp_furt = montar_pool((atributos, "Destreza"), (habilidades, "Furtividade"))
     call rolar_teste(res_furt, 2, comp_furt)
@@ -380,7 +390,7 @@ label caca_beco:
         call rolar_teste(res_briga, 2, comp_briga)
 
         if _return >= 2:
-            show bandido ferido with dissolve
+            show bandido at left with hpunch
             "Você quebra o pulso dele e bebe rápido e sem cuidado. Foi sujo e deixou marcas, mas você sobreviveu."
             hide bandido with dissolve
             $ fome = max(0, fome - 2)
@@ -388,7 +398,7 @@ label caca_beco:
             jump inicio_investigacao
         else:
             "Ele é rápido demais. A lâmina rasga seu estômago. Pior: os gritos dele ecoaram. A polícia chegou na entrada do beco."
-            hide bandido with dissolve
+            hide bandido with vpunch
             $ fome = max(0, fome - 1)
             $ saude_atual -= 2
             call escalar_conflito(3, "Você está encurralado pela polícia. É hora de forçar a saída.")
@@ -409,8 +419,8 @@ label caca_clube:
 
     "A segunda está sentada no bar. Uma mulher de terninho escuro, girando um copo de dry martini intocado. O olhar dela é cínico, entediado, avaliando todo mundo com desdém. A respiração é lenta e controlada. O sangue dela deve ser complexo, denso, com o sabor maduro da melancolia."
 
-    show dancarina dancando at left with dissolve
-    show executiva entediada at right with dissolve
+    show dancarina at left with dissolve
+    show executiva at right with dissolve
 
     menu:
         "A mulher de vestido vermelho na pista de dança":
@@ -420,7 +430,7 @@ label caca_clube:
 
             p "A música está alta, mas eu consigo ouvir o seu coração daqui..."
 
-            show dancarina sedutora at left with dissolve
+            show dancarina at truecenter with ease
             "Ela sorri, a respiração falhando. \"Me leva pra um lugar mais calmo\", ela sussurra no seu ouvido."
 
         "A mulher de terninho no bar":
@@ -430,7 +440,7 @@ label caca_clube:
 
             p "Lugar cheio, mas você parece que preferia estar em qualquer outro canto do mundo."
 
-            show executiva interessada at right with dissolve
+            show executiva at truecenter with ease
             "Ela vira o rosto para você. Os olhos dela são afiados. \"Pessoas me entediam. Mas você... você não tem a mesma expressão desesperada que o resto do bar\", ela diz, sorrindo de canto. \"Estou no camarote VIP. Quer companhia para ignorar essa festa?\""
 
     "Faça um teste de Carisma + Persuasão (Dificuldade 2) para envolvê-la completamente."
@@ -467,9 +477,9 @@ label caca_clube:
         jump inicio_investigacao
     else:
         if alvo_caca == "dancarina":
-            show dancarina panico with dissolve
+            show dancarina at truecenter with hpunch
         else:
-            show executiva panico with dissolve
+            show executiva at truecenter with hpunch
         "Sua Besta rosnou alto demais no meio do beijo. Ela sente o erro — um puxão forte demais, um som gutural baixo demais para ser humano — e entra em pânico, empurrando você com toda a força que o medo empresta."
         "O grito dela morre abafado pela música, mas não morre rápido o suficiente. Dois seguranças imensos já vêm na direção de vocês, e a Máscara, pela primeira vez esta noite, racha de verdade."
         $ humanidade -= 1
@@ -499,7 +509,7 @@ label caca_clube:
 
 label caca_comerciante:
     scene black with fade
-    show dr_miller ganancioso at center with dissolve
+    show dr_miller at center with moveinbottom
     "Você vai até o necrotério onde o Doutor Miller vende bolsas de sangue roubadas."
     dr_miller "O sangue tá em falta, mocinho. Não quero dinheiro. Quero que fique me devendo um favor."
 
@@ -508,12 +518,12 @@ label caca_comerciante:
     call rolar_teste(res_int, 2, comp_int)
 
     if _return >= 2:
-        show dr_miller assustado with dissolve
+        show dr_miller at center with hpunch
         "Você prensa a mão dele na mesa. Sua voz sai como gelo. Miller recua e entrega as bolsas, aterrorizado. Sangue de graça."
         $ fome = 0
         jump inicio_investigacao
     else:
-        show dr_miller arrogante with dissolve
+        show dr_miller at center with ease
         "Ele ri da sua tentativa. 'Meu mestre é do Primogênito. Ou aceita a Dívida de Vida, ou sai vazio'."
         menu:
             "Aceitar a Dívida Primogênita":
