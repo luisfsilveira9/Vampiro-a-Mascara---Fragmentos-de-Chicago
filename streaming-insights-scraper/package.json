@@ -1,0 +1,19 @@
+{
+  "name": "streaming-insights-scraper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Automação de exportação dos dashboards de artista (Spotify for Artists etc.) via Playwright.",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "login:spotify": "tsx src/loginSpotify.ts",
+    "export:spotify": "tsx src/exportSpotify.ts",
+    "validate": "tsx src/validate.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "playwright": "^1.46.0",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
+  }
+}

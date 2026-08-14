@@ -24,3 +24,14 @@
 /dialogue.tab
 /dialogue.txt
 /strings.json
+
+# streaming-insights-api
+/streaming-insights-api/node_modules
+/streaming-insights-api/dist
+/streaming-insights-api/.env
+
+# streaming-insights-scraper
+/streaming-insights-scraper/node_modules
+/streaming-insights-scraper/dist
+/streaming-insights-scraper/.auth
+/streaming-insights-scraper/exports

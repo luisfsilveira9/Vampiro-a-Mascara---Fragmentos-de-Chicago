@@ -1,0 +1,21 @@
+{
+  "name": "streaming-insights-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Insights de streaming via APIs oficiais (Spotify Web API + YouTube Analytics API).",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "auth:youtube": "tsx src/authYoutube.ts",
+    "validate": "tsx src/validate.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "googleapis": "^144.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
+  }
+}
